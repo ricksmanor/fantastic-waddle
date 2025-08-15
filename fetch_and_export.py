@@ -1,17 +1,18 @@
 import pandas as pd
-import requests
+from trustpilot_scraper.scraper import scrape_trustpilot_reviews
 
-# Live JSON API URL
-url = "https://api.outscraper.cloud/requests/NWE2MjFmODgyZjgxNGU0OWFhOTk0NDE3NzQwMThkZTQsMjAyNTA4MTUxMDA3MTZzM2Y"
+def main():
+    base_url = 'https://uk.trustpilot.com/review/ukstoragecompany.co.uk'
+    print("Scraping Trustpilot reviews...")
+    reviews = scrape_trustpilot_reviews(base_url)
 
-# Fetch the live data
-response = requests.get(url)
-data = response.json()
+    if not reviews:
+        print("No reviews found.")
+        return
 
-# Convert "data" key to DataFrame
-df = pd.DataFrame(data["data"])
+    df = pd.DataFrame(reviews)
+    df.to_excel("data.xlsx", index=False)
+    print(f"Exported {len(df)} reviews to data.xlsx")
 
-# Save to Excel
-df.to_excel("data.xlsx", index=False)
-
-print("Excel updated successfully!")
+if __name__ == "__main__":
+    main()
