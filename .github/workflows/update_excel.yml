@@ -1,9 +1,9 @@
 #name: Live JSON to Excel
 
 #on:
-  schedule:
-    - cron: "0 0 * * *" # every day 
-  workflow_dispatch: # allow manual run
+  #schedule:
+   # - cron: "0 0 * * *" # every day 
+#  workflow_dispatch: # allow manual run
 
 jobs:
   update-excel:
